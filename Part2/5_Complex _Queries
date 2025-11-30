@@ -7,11 +7,10 @@ Referee strictness
 
 ```sql
 SELECT
-    r.refereename, 
-    AVG(ght.penalities) AS avg_penalties_per_game,
+    r.refereename, AVG(ght.penalities) AS avg_penalties_per_game,
     CASE
         WHEN AVG(ght.penalities) >= 10 THEN 'Strict'
-        WHEN AVG(ght.penalities) >= 5 THEN 'Average'
+        WHEN AVG(ght.penalities) >= 5  THEN 'Average'
         ELSE 'Lenient'
     END AS strictness_category
 FROM referee AS r
@@ -19,15 +18,16 @@ JOIN game_has_referee AS ghr
     ON ghr.idReferee = r.idreferee
 JOIN game_has_teams AS ght
     ON ght.Game_idGame = ghr.idGame
-GROUP BY r.refereename
-ORDER BY avg_penalties_per_game DESC;
+GROUP BY
+    r.refereename
+ORDER BY
+    avg_penalties_per_game DESC;
 ```
 
 # Managerial Reasoning
 
-This query shows how strict each referee is based on average penalties called.
-Coaches can prepare players for the flow of the game by understanding how tight the officiating will be.
-This can help reduce penalties, manage discipline, and create a plan for how aggressive or careful players should be during a match.
+This query averages the overall penalties that refs make to gauge their level of strictness.  
+Knowing how strict referees are can help coaching staff prepare players for the flow of the game and plan game strategy according to how strict referees are.
 
 ---
 

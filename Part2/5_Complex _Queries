@@ -1,18 +1,20 @@
-# Managerial Reasoning 
-Average Point Differential per Team:
-The average point differential helps determine which team is actually dominating rather than just winning games by a lucky close margin. Coaching staff can use this as a better metric than season record to understand how well the team is performing. The SEC conference could also use this as a metric to determine which teams are leading the conference and, if teams have similar records, which are likely to reach the SEC championship. 
-Average Attendance by Home Team:
-This bar chart shows which SEC teams draw the largest crowds at home. Managers can learn about fan engagement and brand strength from average attendance numbers. High average attendance can signal a strong fan base, a good brand, and a strong gameday experience. Low average attendance could be a red flag for marketing, scheduling, and brand strength. These numbers can also help managers understand the facility's ROI.
-Game Results by Weather:
-Knowing a team's ability to persevere through different weather conditions helps gauge its ability to travel for bowl games, late-season games, or nonconference opponents. This data can help coaching staff decide whether to prioritize practicing in conditions different from those of the home team.   
 
-# 5 Complex Query
+
+# **FINAL QUERY SECTION (5 COMPLEX QUERIES)**
+
+## Query 1
+
+# Query
+
 Referee strictness
+
+```sql
 SELECT
-    r.refereename, AVG(ght.penalities) AS avg_penalties_per_game,
+    r.refereename, 
+    AVG(ght.penalities) AS avg_penalties_per_game,
     CASE
         WHEN AVG(ght.penalities) >= 10 THEN 'Strict'
-        WHEN AVG(ght.penalities) >= 5  THEN 'Average'
+        WHEN AVG(ght.penalities) >= 5 THEN 'Average'
         ELSE 'Lenient'
     END AS strictness_category
 FROM referee AS r
@@ -20,30 +22,152 @@ JOIN game_has_referee AS ghr
     ON ghr.idReferee = r.idreferee
 JOIN game_has_teams AS ght
     ON ght.Game_idGame = ghr.idGame
-GROUP BY
-    r.refereename
-ORDER BY
-    avg_penalties_per_game DESC;
+GROUP BY r.refereename
+ORDER BY avg_penalties_per_game DESC;
+```
 
+# Managerial Reasoning
 
+This query shows how strict each referee is based on average penalties called.
+Coaches can prepare players for the flow of the game by understanding how tight the officiating will be.
+This can help reduce penalties, manage discipline, and create a plan for how aggressive or careful players should be during a match.
 
+---
 
+## Query 2
 
+# Query
 
+Average point differential by team
 
+```sql
+SELECT 
+    t.Teamname,
+    AVG(g.TotalscoreHome - g.TotalscoreAway) AS avg_point_diff
+FROM team AS t
+JOIN game_team_stats AS gts
+    ON t.idTeam = gts.Team_idTeam
+JOIN game AS g
+    ON g.idGame = gts.Game_idGame
+GROUP BY t.Teamname
+ORDER BY avg_point_diff DESC;
+```
 
+# Managerial Reasoning
 
+Point differential is a better measure of team strength than wins alone.
+Teams with high differentials are dominating games, not winning by luck.
+Conference leaders and coaching staff can use this to judge true performance and predict championship contenders.
 
+---
 
+## Query 3
 
+# Query
 
+Average home attendance using a view
 
+```sql
+-- Step 1: Create the view
+CREATE OR REPLACE VIEW home_attendance AS
+SELECT 
+    t.Teamname,
+    g.Attendance
+FROM game AS g
+JOIN team AS t
+    ON g.Stadium_idStadium = t.HomestadiumID;
 
+-- Step 2: Query the view
+SELECT 
+    Teamname,
+    AVG(Attendance) AS avg_home_attendance
+FROM home_attendance
+GROUP BY Teamname
+ORDER BY avg_home_attendance DESC;
+```
 
+# Managerial Reasoning
 
+Attendance shows the strength of a teams brand and fan engagement.
+High attendance supports revenue, stadium investments, and marketing plans.
+Low attendance can show weak fan support or gaps in game day experience.
 
+---
 
-Managerial Reasoning:
-This query averages the overall penalties that refs make to gauge their level of strictness.  Knowing how strict referees are can help coaching staff prepare players for the flow of the game and plan game strategy according to how strict referees are.
+## Query 4
 
+# Query
 
+Weather impact on scoring
+
+```sql
+WITH weather_points AS (
+    SELECT 
+        Weather,
+        (TotalscoreHome + TotalscoreAway) AS total_points
+    FROM game
+)
+SELECT 
+    Weather,
+    AVG(total_points) AS avg_points_scored
+FROM weather_points
+GROUP BY Weather
+ORDER BY avg_points_scored DESC;
+```
+
+# Managerial Reasoning
+
+Weather affects scoring and team performance.
+This helps coaches prepare for bowl games, late season travel, and games in unfamiliar climates.
+Teams can decide if they should train more in rain, heat, or cold depending on the results.
+
+---
+
+## Query 5
+
+# Query
+
+Turnover impact on win percentage
+
+```sql
+SELECT 
+    t.Teamname,
+    AVG(gts.Turnovers) AS avg_turnovers,
+    SUM(
+        CASE 
+            WHEN gts.Team_idTeam = t.idTeam 
+             AND (
+                 (gts.Team_idTeam = t.idTeam AND g.TotalscoreHome > g.TotalscoreAway)
+             ) THEN 1
+            ELSE 0
+        END
+    ) AS wins,
+    COUNT(*) AS total_games,
+    (
+        SUM(
+            CASE 
+                WHEN gts.Team_idTeam = t.idTeam 
+                 AND (
+                     (gts.Team_idTeam = t.idTeam AND g.TotalscoreHome > g.TotalscoreAway)
+                 ) THEN 1
+                ELSE 0
+            END
+        ) / COUNT(*)
+    ) AS win_percentage
+FROM team AS t
+JOIN game_team_stats AS gts
+    ON t.idTeam = gts.Team_idTeam
+JOIN game AS g
+    ON g.idGame = gts.Game_idGame
+GROUP BY t.Teamname
+ORDER BY win_percentage DESC;
+```
+
+# Managerial Reasoning
+
+Turnovers have a big effect on game outcome.
+Teams that protect the ball win more.
+Coaches can use this to focus training on ball security, quarterback decision making, and forcing defensive turnovers.
+This gives a clear picture of how much turnovers affect winning in the SEC.
+
+--

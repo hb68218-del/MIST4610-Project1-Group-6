@@ -7,14 +7,11 @@
 
 ## Project Objective
 
-The objective of **Project Part 2** is to apply advanced SQL querying and data visualization techniques to analyze SEC college football data. This phase focuses on generating meaningful insights through complex SQL operations and transforming results into clear, professional analytics dashboards for managerial decision making.
+This project involved designing and analyzing a relational database to explore performance, operational, and behavioral trends within SEC college football. The goal was to move beyond raw game outcomes and demonstrate how structured data, advanced SQL analysis, and visualization can support informed decision making in a complex, real-world domain.
 
-By the end of the project, students demonstrate proficiency in:
+The project progressed from database schema design and data modeling to advanced analytical querying and dashboard development. Using SQL and Power BI, the analysis translated large, multi-dimensional datasets into actionable insights related to team performance, fan engagement, and external factors such as weather and officiating.
 
-- Writing multi-table and analytical SQL queries  
-- Identifying trends such as referee behavior, weather impacts, and scoring patterns  
-- Building Power BI dashboards from SQL outputs  
-- Communicating insights through structured managerial reasoning  
+Overall, the project demonstrates the ability to scope an analytical problem, structure data for analysis, extract meaningful insights, and communicate results in a way that supports managerial and strategic decision making.
 
 ---
 

@@ -58,6 +58,12 @@ These data elements were queried, aggregated, and visualized to uncover meaningf
 
 ### Advanced SQL Querying
 
+<img width="820" height="1002" alt="image" src="https://github.com/user-attachments/assets/0334c3bd-f01b-480f-b194-c92822cd7dcd" />
+<img width="749" height="931" alt="image" src="https://github.com/user-attachments/assets/2e2b8fd7-b763-44c1-80bd-56bca616c796" />
+<img width="750" height="823" alt="image" src="https://github.com/user-attachments/assets/b1bfe459-ccc7-407c-861b-be972816d8e9" />
+<img width="746" height="1012" alt="image" src="https://github.com/user-attachments/assets/0059aa36-d671-4650-bd2c-3464ad00744e" />
+
+
 Five complex SQL queries were created to analyze:
 
 - Referee strictness  
@@ -71,6 +77,8 @@ Each query was tested, documented, and exported with validated results.
 ---
 
 ### Data Visualization and Insights
+
+<img width="977" height="1104" alt="image" src="https://github.com/user-attachments/assets/d6628838-008c-4d0a-8728-786c96eb8937" />
 
 A Power BI dashboard was produced containing three primary visuals:
 

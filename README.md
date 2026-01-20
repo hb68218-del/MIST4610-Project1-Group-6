@@ -1,105 +1,98 @@
-# College Football SQL Analytics Project
-
-**Haeun (Sally) Bae**
-
+---
+title: "College Football SQL Analytics Project"
+author: "Sally Bae" and 
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: flatly
 ---
 
-## Introduction
+## Project Overview
 
-This repository documents my technical contributions to an academic research project focused on large scale analysis of unstructured document data. My work centered on designing and implementing a scalable data processing pipeline that converts raw document exports into clean, structured, and analysis ready datasets.
+This project explores NCAA college football performance and fan engagement through a relational SQL database. The goal was to transform raw sports data into structured insights that support data driven decision making for athletic departments, analysts, and leadership.
 
-The project required working with messy, real world text data and emphasized automation, reproducibility, and data quality. Using Python, I built workflows for document ingestion, text normalization, article level segmentation, metadata extraction, and keyword based flagging to support efficient research use.
+Using SQL and Power BI, the project analyzes team performance, attendance trends, and external game factors such as weather and officiating to understand what drives outcomes on and off the field.
 
-This repository highlights the technical methods and tools I developed, independent of unpublished research findings, and reflects my experience applying data engineering and analytics skills in an academic research setting.
+## Objectives
 
+- Design and implement a normalized relational database for college football analytics  
+- Analyze team and game level performance using complex SQL queries  
+- Identify trends in attendance and fan engagement  
+- Translate technical SQL outputs into clear business insights through dashboards  
 
-## Project Objective
+## Dataset Scope
 
-The objective of this work was to design and implement a scalable technical pipeline to process large volumes of unstructured document data for academic research use. The focus was on building reliable, automated methods for text cleaning, document segmentation, metadata extraction, and data validation to support downstream analysis conducted by the research team.
+The database integrates multiple data dimensions including:
 
-This contribution emphasizes data engineering, automation, and reproducible research practices rather than substantive research findings.
+- Teams and conferences  
+- Games and schedules  
+- Scores and outcomes  
+- Attendance figures  
+- Weather conditions  
+- Officiating assignments  
 
----
+The schema was designed to support scalable analysis across seasons, teams, and venues.
 
-## Technical Process Overview
+## Database Design
 
-### Data Ingestion and File Handling
+- Built a relational schema with primary and foreign keys to enforce data integrity  
+- Applied normalization principles to reduce redundancy  
+- Modeled one to many and many to many relationships where appropriate  
+- Optimized tables for analytical querying and joins  
 
-I worked with large scale document exports stored in batch file formats. Raw files were preserved in their original form, and automated directory traversal was implemented to enable scalable processing across hundreds of documents.
+## SQL Analysis
 
-Key technical focus areas:
-- Batch file handling
-- File system automation
-- Traceability of raw inputs
+Key analyses include:
 
----
+- Team performance comparisons across seasons and conferences  
+- Home vs away performance trends  
+- Attendance patterns by team, location, and game conditions  
+- Impact of weather and officiating on game outcomes  
+- Aggregate and window functions for trend analysis  
 
-### Text Conversion and Normalization
+### Advanced SQL Techniques Used
 
-Unstructured documents were programmatically converted into plain text to enable reliable parsing. Cleaning steps were applied to remove formatting artifacts, normalize whitespace, and standardize character encoding.
+- Multi table joins  
+- Subqueries and common table expressions  
+- Aggregations and grouping  
+- Conditional logic and filtering  
 
-Key technical focus areas:
-- Text normalization
-- Encoding cleanup
-- Preprocessing for structured parsing
+## Visualization and Insights
 
----
+SQL query outputs were connected to Power BI to create interactive dashboards that:
 
-### Document Segmentation
+- Highlight performance trends and anomalies  
+- Compare teams and conferences visually  
+- Present attendance drivers in an executive friendly format  
+- Support managerial level decision making  
 
-Many source files contained multiple documents bundled together. I implemented logic to identify document boundaries and split batch files into individual article level records, ensuring one document per observation.
+## Tools and Technologies
 
-Key technical focus areas:
-- Pattern based document segmentation
-- Consistent record structuring
-- Error handling for edge cases
+- SQL (MySQL or PostgreSQL)  
+- Power BI  
+- GitHub  
+- Relational database design principles  
 
----
+## Repository Structure
 
-### Metadata Extraction
-
-I developed structured parsing logic to extract consistent metadata fields from each document, including identifiers, publication details, source information, and full text. Fallback rules were applied to reduce missing values and improve robustness.
-
-Key technical focus areas:
-- Regular expression based parsing
-- Structured metadata design
-- Validation of extracted fields
-
----
-
-### Keyword Detection and Flagging
-
-To support efficient document review, I implemented keyword based detection across full document text. This produced keyword hit counts and categorical indicators that assist with filtering and prioritization.
-
-Key technical focus areas:
-- Configurable keyword frameworks
-- Automated text scanning
-- Feature generation for analysis readiness
-
----
-
-## What I Built
-
-- A Python based document processing pipeline  
-- Automated workflows for cleaning and structuring unstructured text  
-- Metadata extraction logic using pattern matching techniques  
-- Keyword detection mechanisms to support large scale review  
-- Validation checks to ensure consistent and reproducible outputs  
-
----
-
-## Technical Skills Demonstrated
-
-- Python scripting and automation  
-- Text processing and regular expressions  
-- Data cleaning and preprocessing  
-- Pipeline design for unstructured data  
-- Reproducible research workflows  
-- Data validation and quality control  
-
----
-
-## Outcome and Impact
-
-The technical pipeline successfully transformed large scale unstructured document exports into clean, structured datasets suitable for academic research workflows. The reliability, scalability, and clarity of the technical implementation contributed to the project’s selection for presentation at the **Terry College of Business Annual Stakeholder Research Meeting**, where the focus was on methodology and technical approach rather than research findings.
-
+```text
+College-football-analytics-SQL/
+│
+├── data/
+│   ├── raw_data
+│   └── cleaned_data
+│
+├── sql/
+│   ├── table_creation.sql
+│   ├── data_inserts.sql
+│   └── analysis_queries.sql
+│
+├── dashboards/
+│   └── powerbi_dashboard.pbix
+│
+├── documentation/
+│   ├── data_dictionary
+│   └── schema_diagram
+│
+└── README.md

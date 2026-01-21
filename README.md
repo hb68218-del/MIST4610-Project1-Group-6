@@ -4,6 +4,7 @@
 **Project Group 6** — **Haeun Bae (Repository Owner & Group Lead)**, Dylan Ray (database support), Mattie Comte (project support)
 
 ---
+<img width="977" height="1104" alt="image" src="https://github.com/user-attachments/assets/d6628838-008c-4d0a-8728-786c96eb8937" />
 
 ## Project Objective
 
